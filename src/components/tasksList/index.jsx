@@ -1,35 +1,27 @@
-import { FlatList, Text, View } from 'react-native'
+import { FlatList, Image, Text, View } from 'react-native'
 
-import { TaskCard } from '../taskCard'
+import TaskCard from '../taskCard'
 import { styles } from './styles'
-import { useRef } from 'react'
 
-const TasksList = ({ tasks, handleCheck, handleEdit, handleDelete }) => {
+const TasksList = ({ tasks, flatListRef, triggerEditTask, handleCheck, handleDelete }) => {
   const renderItem = ({ item }) => (
-    <TaskCard
-      item={item}
-      handleCheck={handleCheck}
-      handleEdit={handleEdit}
-      handleDelete={handleDelete}
-    />
+    <TaskCard item={item} triggerEditTask={triggerEditTask} handleCheck={handleCheck} handleDelete={handleDelete} />
   )
-
-  const elementRef = useRef()
 
   return (
     <View style={styles.listContainer}>
       {tasks.length === 0 ? (
         <View style={styles.noContentContainer}>
+          <Image style={styles.noContentImg} source={require('../../assets/warning.png')} />
           <Text style={styles.noContentText}>No hay tareas</Text>
         </View>
       ) : (
         <FlatList
-          ref={elementRef}
+          ref={flatListRef}
           data={tasks}
           renderItem={renderItem}
           keyExtractor={item => item.id}
           showsVerticalScrollIndicator={false}
-          style={styles.itemList}
         />
       )}
     </View>

@@ -1,6 +1,5 @@
-import { colors, fonts } from '../../theme'
-
 import { StyleSheet } from 'react-native'
+import { colors, fonts } from '../../theme'
 
 export const styles = StyleSheet.create({
   modalHeading: {
@@ -29,24 +28,9 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.textLight
   },
-  dropdownText: {
-    color: colors.text,
-    fontFamily: fonts.regular,
-    fontSize: fonts.sm
-  },
-  dropdownLabel: {
-    color: colors.text,
-    fontFamily: fonts.regular,
-    fontSize: fonts.sm
-  },
-  dropdownContainer: {
-    backgroundColor: colors.backgroundLight,
-    borderColor: colors.textLight
-  },
-  dropdownPlaceholder: {
-    color: colors.textLight,
-    fontFamily: fonts.regular,
-    fontSize: fonts.sm
+  timePicker: {
+    height: 90,
+    width: '100%'
   },
   modalFormActions: {
     flexDirection: 'row',
