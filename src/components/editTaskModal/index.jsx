@@ -1,35 +1,55 @@
-import { TouchableWithoutFeedback, TextInput, Text, View } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { View, Text, TouchableWithoutFeedback, TextInput, Alert } from 'react-native'
 import DropDownPicker from 'react-native-dropdown-picker'
 import CustomModal from '../customModal'
+import { useDropdown } from '../../hooks'
 import { styles } from './styles'
 
-const AddTaskModal = ({
-  open,
-  handleChangeTitle,
-  handleChangeDesc,
-  task,
-  handleCancel,
-  handleAddTask,
-  dropdownOpen,
-  dropdownValue,
-  items,
-  setIsDropdownOpen,
-  setDropdownValue,
-  setItems
-}) => {
+const dropdownItems = [
+  { label: 'Critical', value: 'critical' },
+  { label: 'High', value: 'high' },
+  { label: 'Medium', value: 'medium' },
+  { label: 'Low', value: 'low' }
+]
+
+const EditTaskModal = ({ open, task, handleCancel, handleEdit }) => {
+  const [newTask, setNewTask] = useState(task)
+
+  const { dropdownOpen, setIsDropdownOpen, dropdownValue, setDropdownValue, items, setItems } =
+    useDropdown(dropdownItems)
+
+  const handleChangeTitle = value => setNewTask({ ...newTask, title: value })
+  const handleChangeDesc = value => setNewTask({ ...newTask, description: value })
+
+  useEffect(() => {
+    setNewTask(task)
+    setDropdownValue(task?.priority)
+  }, [task])
+
+  const handleEditTask = () => {
+    if (newTask?.title === '' || newTask?.description === '' || dropdownValue === null) {
+      Alert.alert('Please fill all fields', 'Title, description and time are required to edit a task', [
+        { text: 'OK', style: 'destructive' }
+      ])
+      return
+    }
+
+    handleEdit(newTask.id, { ...newTask, priority: dropdownValue })
+  }
+
   return (
     <CustomModal open={open}>
-      <Text style={styles.modalHeading}>Add Task</Text>
+      <Text style={styles.modalHeading}>Edit Task</Text>
 
       <View style={styles.modalForm}>
         <View style={styles.modalFormGroup}>
           <Text style={styles.modalFormLabel}>Title</Text>
-          <TextInput onChangeText={handleChangeTitle} value={task.title} style={styles.modalFormInput} />
+          <TextInput onChangeText={handleChangeTitle} value={newTask?.title} style={styles.modalFormInput} />
         </View>
 
         <View style={styles.modalFormGroup}>
           <Text style={styles.modalFormLabel}>Description</Text>
-          <TextInput onChangeText={handleChangeDesc} value={task.description} style={styles.modalFormInput} />
+          <TextInput onChangeText={handleChangeDesc} value={newTask?.description} style={styles.modalFormInput} />
         </View>
 
         <View style={styles.modalFormGroup}>
@@ -57,9 +77,9 @@ const AddTaskModal = ({
             </View>
           </TouchableWithoutFeedback>
 
-          <TouchableWithoutFeedback onPress={handleAddTask}>
+          <TouchableWithoutFeedback onPress={handleEditTask}>
             <View style={[styles.modalFormAction, styles.primaryButton, { marginLeft: 6 }]}>
-              <Text style={styles.modalFormActionText}>Add</Text>
+              <Text style={styles.modalFormActionText}>Save</Text>
             </View>
           </TouchableWithoutFeedback>
         </View>
@@ -68,4 +88,4 @@ const AddTaskModal = ({
   )
 }
 
-export default AddTaskModal
+export default EditTaskModal

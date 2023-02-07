@@ -23,23 +23,11 @@ export const styles = StyleSheet.create({
     fontFamily: fonts.semiBold,
     fontSize: fonts.md
   },
-  cardPriority: {
-    color: colors.text,
+  cardTime: {
+    color: colors.secondary,
     fontFamily: fonts.bold,
-    fontSize: fonts.xs,
+    fontSize: fonts.md,
     textTransform: 'uppercase'
-  },
-  critical: {
-    color: colors.critical
-  },
-  high: {
-    color: colors.high
-  },
-  medium: {
-    color: colors.medium
-  },
-  low: {
-    color: colors.low
   },
   cardDescription: {
     color: colors.text,
@@ -56,15 +44,9 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center'
   },
-  taskDone: {
-    color: colors.done,
-    fontFamily: fonts.semiBold,
-    fontSize: fonts.xs,
-    marginLeft: 8
-  },
-  taskPending: {
-    color: colors.pending,
-    fontFamily: fonts.semiBold,
+  alarmText: {
+    color: colors.yellow,
+    fontFamily: fonts.regular,
     fontSize: fonts.xs,
     marginLeft: 8
   },
@@ -80,5 +62,8 @@ export const styles = StyleSheet.create({
     width: 16,
     height: 16,
     resizeMode: 'contain'
+  },
+  notificationsIcon: {
+    tintColor: colors.yellow
   }
 })

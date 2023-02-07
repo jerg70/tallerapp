@@ -2,21 +2,24 @@ import { StyleSheet } from 'react-native'
 import { colors, fonts } from '../../theme'
 
 export const styles = StyleSheet.create({
-  listContainer: {
-    flex: 1
+  container: {
+    flex: 1,
+    backgroundColor: colors.backgroundLight,
+    paddingTop: 48,
+    paddingHorizontal: 24
   },
-  noContentContainer: {
+  contentContainer: {
     flex: 0.8,
-    alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  noContentImg: {
+  image: {
     tintColor: colors.yellow,
     width: 36,
     height: 36,
     marginBottom: 12
   },
-  noContentText: {
+  text: {
     color: colors.text,
     fontFamily: fonts.medium,
     fontSize: fonts.sm
